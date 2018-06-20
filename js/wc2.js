@@ -1,0 +1,232 @@
+
+var trial=1;
+var i=0; //word in one trial
+var t=0;
+var error=0;
+var points=0;
+//window.onload = function() {
+//    var audio = document.getElementById('audio');
+//    audio.play();
+//}
+//debugger;
+
+function playSound(path) {
+  // audio supported?
+  if (typeof window.Audio === 'function') {
+    var audioElem = new Audio();
+    audioElem.src = path;
+    audioElem.play();
+  }
+}
+            
+//            word challenge
+
+function loseHeart(i){
+    var heart_i=document.getElementById('heart'+i);
+        heart_i.style.opacity = "0.3";
+        heart_i.style.filter  = 'alpha(opacity=30)';
+}
+
+function wcTrial(i){
+//    var sctrialNum = document.createElement('span');
+//    sctrialNum.innerHTML=i+"/3";
+//    var scTrial = document.querySelector(".scTrial");
+//    scTrial.append(sctrialNum);
+    
+    $("#wcTrial").append("<span id='trialNum'>" + i + "/3</span>");
+}
+
+var words_wc1=["Buy","Clothes","Neighbor"];
+var trial4=["bait","bay","buy","bite","big"];
+var trial5=["classes","clothes","closes","cloth","cleans"];
+var trial6=["either","higher","nature","northern","neighbor"];
+var wordlist=[false,false,false];
+
+//if(trial==1) {
+console.log('trial should be 1');
+console.log(trial);
+    document.querySelector('.robby').addEventListener('click', function(){
+    playSound('WC2/Trial_' + (trial) + "/"+ words_wc1[i] + '.wav');
+    });
+    wcTrial(trial);
+console.log('trial should be 1');
+console.log(trial);
+
+for(t=0;t<trial4.length;t++){
+    $("#word_"+ (t+1)).replaceWith("<span id='word_"+(t+1)+"'>"+ trial4[t]+"</span>");
+}
+wordlist[0]=true;
+    
+    
+
+function submitAnswer(){
+    if(trial==1) {
+        console.log('first click');
+    var choose = $("input[name='WC_choices']:checked").val();
+    if(choose=='Word1'){
+        playSound('WC2/Trial_1/Buy bait.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word2'){
+        playSound('WC2/Trial_1/Buy bay.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word3'){
+        playSound('WC2/Trial_1/Buy.wav');
+        $('.plusPoints').css('display','block');
+        points=points+10;
+        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ points + " points</span>");
+        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ points + " points</span>");
+
+    }
+    else if(choose=='Word4'){
+        playSound('WC2/Trial_1/Buy bite.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word5'){
+        playSound('WC2/Trial_1/Buy big.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    //trial=trial+1;
+    $(".check").attr({
+            "value": "Next",
+            "class": "next",
+            "onclick": "goToNext()"
+        });
+    }
+    
+//    =["classes","clothes","closes","cloth","cleans"];
+    if(trial==2) {
+        console.log('second click');
+    var choose = $("input[name='WC_choices']:checked").val();
+    if(choose=='Word1'){
+        playSound('WC2/Trial_2/Clothes classes.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word2'){
+        playSound('WC2/Trial_2/Clothes.wav');
+        $('.plusPoints').css('display','block');
+        points=points+10;
+        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ points + " points</span>");
+        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ points + " points</span>");
+
+    }
+    else if(choose=='Word3'){
+        playSound('WC2/Trial_2/Clothes closes.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word4'){
+        playSound('WC2/Trial_2/Clothes cloth.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word5'){
+        playSound('WC2/Trial_2/Clothes cleans.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+        
+
+    }
+    //trial=trial+1;
+        $(".check").attr({
+            "value": "Next",
+            "class": "next",
+            "onclick": "goToNext()"
+        });
+    }
+    
+//=["either","higher","nature","northern","neighbor"];
+    if(trial==3) {
+        console.log('third click');
+    var choose = $("input[name='WC_choices']:checked").val();
+    if(choose=='Word1'){
+        playSound('WC2/Trial_3/Neighbor either.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word2'){
+        playSound('WC2/Trial_3/Neighbor higher.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word3'){
+        playSound('WC2/Trial_3/Neighbor nature.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word4'){
+        playSound('WC2/Trial_3/Neighbor northern.wav');
+        $('.minusPoints').css('display','block');
+        error=error+1;
+    }
+    else if(choose=='Word5'){
+        playSound('WC2/Trial_3/Neighbor.wav');
+        $('.plusPoints').css('display','block');
+        points=points+10;
+        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ points + " points</span>");
+        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ points + " points</span>");
+    }
+    //trial=trial+1;
+        $(".check").attr({
+            "value": "Next",
+            "class": "next",
+            "onclick": "goToNext()"
+        });
+    }
+    
+    if (error==1) {
+        loseHeart(1);
+    }
+    else if (error==2) {
+    loseHeart(2);
+    }
+    else if(error==3) {
+    loseHeart(3);
+    }
+}
+
+//console.log('trial should be 2 if clicked once');
+
+
+function goToNext(){
+//        console.log('this is go to next');
+        if(trial<3){
+            
+    trial=trial+1;
+    $(".plusPoints").css("display","none");
+    $(".minusPoints").css("display","none");
+    
+    $(".next").attr({
+        "value": "Check",
+        "class": "check",
+        "onclick": "submitAnswer()"
+    });
+    $("#trialNum").replaceWith("<span id='trialNum'>" + (trial) + "/3</span>");
+    $('input[name=WC_choices]').attr('checked',false);        
+        
+            
+    document.querySelector('.robby').addEventListener('click', function(){
+    playSound('WC2/Trial_' + (trial) + "/"+ words_wc1[trial-1] + '.wav');
+    });
+    //wcTrial(trial);
+    if(trial==2){
+        for(t=0;t<trial5.length;t++){
+            $("#word_"+ (t+1)).replaceWith("<span id='word_"+(t+1)+"'>"+ trial5[t]+"</span>");
+            }
+    }
+    else {
+        for(t=0;t<trial6.length;t++){
+            $("#word_"+ (t+1)).replaceWith("<span id='word_"+(t+1)+"'>"+ trial6[t]+"</span>");
+            }
+    }           
+}
+    else {
+        console.log("if judge");
+    }
+}
