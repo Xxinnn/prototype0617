@@ -38,6 +38,9 @@
             </ul>
         </nav>
         <div class="container">
+          <iframe src="prototype_0621.html" id="twine" width=900 height=550>
+                   
+     </iframe>
            <div class="activity_panel">
 <!--              number of trial-->
                <div class="wcTrial" id="wcTrial">
@@ -106,4 +109,68 @@
     </body>
     <script src="js/jquery.min.js"></script>
     <script src="js/wc2.js"></script>
+    <script>
+        var myData = []
+    $(document).ready(function(){
+        $('#twine').hide();
+        //$('.activity_panel').hide();
+        $('#click').on('click',function(){
+            var myIframe=$('#twine')[0];
+            myIframe.contentWindow.postMessage('hello','*');
+        });
+        window.onmessage=function(e){
+                if(e.data == 'bye') {
+                    console.log('It works');
+                }
+            }
+    });
+        
+//        var array=[];
+//        array.push();
+//        console.log(array);
+        
+        //var seconds = new Date().getTime() / 1000;
+//        if(answer==='Hello Robby')  {
+//            $('#twine').hide();
+//        }
+        window.addEventListener('message', function(event) {
+            if(event.data.event_id === 'my_cors_message_wc2'){
+                $('#twine').hide();
+                $('.activity_panel').show();
+                console.log(event.data.data);
+                myData = event.data.data.v1;
+            }
+            breakPoint="here";
+            
+            if(event.data.event_id === 'my_cors_message_sc2'){
+                //$('#twine').hide();
+                location.href = "sc2.html";
+                //window.open("sc1.html","_self");
+                //$('.activity_panel').show();
+                console.log(event.data.data);
+                myData = event.data.data.v1;
+            }
+        });
+        
+        function pushWord(word) {
+            seconds = new Date().getTime() / 1000 | 0;
+            myData.push([word, seconds])
+        }
+        
+        function showTwine() {
+             var myIframe=$('#twine')[0];
+            myIframe.contentWindow.postMessage(
+                        {
+                            event_id: 'show_twine',
+                            data: {
+                                v1: myData, 
+                                v2: 'value2'
+                            }
+                        }, 
+                        "*" //or "www.parentpage.com"
+                        ); 
+        }
+
+    </script>
+    
 </html>

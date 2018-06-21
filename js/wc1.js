@@ -42,6 +42,8 @@ var trial2=["instant","inched","listed","insist","instead"];
 var trial3=["ledges","landing","language","teenage","lunches"];
 var wordlist=[false,false,false];
 
+var seconds;
+var input;
 //if(trial==1) {
 console.log('trial should be 1');
 console.log(trial);
@@ -62,13 +64,14 @@ wordlist[0]=true;
 function submitAnswer(){
     if(trial==1) {
         console.log('first click');
-    var choose = $("input[name='WC_choices']:checked").val();
-    if(choose=='Word1'){
+     input = $("input[name='WC_choices']:checked").val();
+        pushWord(input);
+    if(input=='Word1'){
         playSound('WC1/Trial_1/Busy bossy.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word2'){
+    else if(input=='Word2'){
         playSound('WC1/Trial_1/Busy.wav');
         $('.plusPoints').css('display','block');
         points=points+10;
@@ -76,17 +79,17 @@ function submitAnswer(){
         $("#spanPoints").replaceWith("<span id='spanPoints'>"+ points + " points</span>");
 
     }
-    else if(choose=='Word3'){
+    else if(input=='Word3'){
         playSound('WC1/Trial_1/Busy body.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word4'){
+    else if(input=='Word4'){
         playSound('WC1/Trial_1/Busy fussy.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word5'){
+    else if(input=='Word5'){
         playSound('WC1/Trial_1/Busy buy.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
@@ -101,28 +104,29 @@ function submitAnswer(){
     
     if(trial==2) {
         console.log('second click');
-    var choose = $("input[name='WC_choices']:checked").val();
-    if(choose=='Word1'){
+     input = $("input[name='WC_choices']:checked").val();
+        pushWord(input);
+    if(input=='Word1'){
         playSound('WC1/Trial_2/Instead instant.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word2'){
+    else if(input=='Word2'){
         playSound('WC1/Trial_2/Instead inched.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word3'){
+    else if(input=='Word3'){
         playSound('WC1/Trial_2/Instead listed.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word4'){
+    else if(input=='Word4'){
         playSound('WC1/Trial_2/Instead insist.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word5'){
+    else if(input=='Word5'){
         playSound('WC1/Trial_2/Instead.wav');
         $('.plusPoints').css('display','block');
         points=points+10;
@@ -142,18 +146,19 @@ function submitAnswer(){
 
     if(trial==3) {
         console.log('third click');
-    var choose = $("input[name='WC_choices']:checked").val();
-    if(choose=='Word1'){
+     input = $("input[name='WC_choices']:checked").val();
+        pushWord(input);
+    if(input=='Word1'){
         playSound('WC1/Trial_3/Language ledges.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word2'){
+    else if(input=='Word2'){
         playSound('WC1/Trial_3/Language landing.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word3'){
+    else if(input=='Word3'){
         playSound('WC1/Trial_3/Language.wav');
         $('.plusPoints').css('display','block');
         points=points+10;
@@ -161,12 +166,12 @@ function submitAnswer(){
         $("#wholePoints").replaceWith("<span id='wholePoints'>"+ points + " points</span>");
 
     }
-    else if(choose=='Word4'){
+    else if(input=='Word4'){
         playSound('WC1/Trial_3/Language teenage.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
     }
-    else if(choose=='Word5'){
+    else if(input=='Word5'){
         playSound('WC1/Trial_3/Language lunches.wav');
         $('.minusPoints').css('display','block');
         error=error+1;
@@ -227,5 +232,8 @@ function goToNext(){
 }
     else {
         console.log("if judge");
+        showTwine();
+        $('.activity_panel').hide();
+        $('#twine').show();
     }
 }

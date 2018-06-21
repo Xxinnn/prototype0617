@@ -19,6 +19,10 @@ function playSound(path) {
             
 //            spelling challenge
 var input;
+var inputArray=[];
+var seconds;
+var checkSeconds=[];
+var nextSeconds=[];
 
 function robbyFade(){
     var robby = document.getElementById('img_robby');
@@ -55,7 +59,6 @@ function scTrial(i){
     var less=["V1","V2"];
     var arrayCorrect=["joyf","ul","ull","spot","less","les","usef","ul","ull"];
 
-    var t;
 //var sanity = 0;
 
     var arrayUser=[];
@@ -88,14 +91,18 @@ document.querySelector('.robby').addEventListener('click', function(){
     scTrial(n+1);
 
 function submitAnswer(){
+    checkSeconds.push(new Date().getTime() / 1000 | 0);
+    console.log(checkSeconds);
     if (n<3) {
 //    robby change opacity
     robbyFade();
 
 //get input and chop
-    input = document.getElementById("s1").value;
-    console.log(input);
-
+    input=document.getElementById("s1").value;
+    inputArray.push(input);
+    console.log(inputArray);
+         pushWord(input);
+        
     string_chop =  function(str, size){
         if (str == null) return [];
         str = String(str);
@@ -219,6 +226,8 @@ function submitAnswer(){
     
 
 function goToNext(){
+    nextSeconds.push(new Date().getTime() / 1000 | 0);
+    console.log(nextSeconds);
         if(n<3){
             
     $('video').remove();
@@ -239,6 +248,9 @@ function goToNext(){
     } 
         else {
             console.log("if judge");
+            showTwine();
+            $('.activity_panel').hide();
+            $('#twine').show();
         }
     }
         

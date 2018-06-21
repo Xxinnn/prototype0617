@@ -18,6 +18,10 @@ function playSound(path) {
             
 //            spelling challenge
 var input;
+var inputArray=[];
+var seconds;
+var checkSeconds=[];
+var nextSeconds=[];
 
 function robbyFade(){
     var robby = document.getElementById('img_robby');
@@ -34,9 +38,9 @@ function robbyBack(){
 }
 
 function loseHeart(i){
-    var heart_i=document.getElementById('heart'+i);
-        heart_i.style.opacity = "0.3";
-        heart_i.style.filter  = 'alpha(opacity=30)';
+    var heart=document.getElementById('heart'+i);
+        heart.style.opacity = "0.3";
+        heart.style.filter  = 'alpha(opacity=30)';
 }
 
 function scTrial(i){
@@ -51,9 +55,7 @@ function scTrial(i){
     var words=["Harmless","Painless","Cheerful"];
     var parts=["Base","All","Suffix"];
     var less=["V1","V2"];
-    var clicked = [false, false, false, false, false, false]
 
-var t;
 //var sanity = 0;
 
 var arrayUser=[];
@@ -86,14 +88,18 @@ document.querySelector('.robby').addEventListener('click', function(){
     });
     scTrial(n+1);
 
-function submitAnswer(){
+function submitAnswer(){ 
+    checkSeconds.push(new Date().getTime() / 1000 | 0);
+    console.log(checkSeconds);
     if (n<3) {
 //    robby change opacity
     robbyFade();
 
 //get input and chop
-    input = document.getElementById("s1").value;
-    console.log(input);
+    input=document.getElementById("s1").value;
+    inputArray.push(input);
+    console.log(inputArray);
+        pushWord(input);
 
     string_chop =  function(str, size){
         if (str == null) return [];
@@ -218,6 +224,8 @@ function submitAnswer(){
     
 
 function goToNext(){
+    nextSeconds.push(new Date().getTime() / 1000 | 0);
+    console.log(nextSeconds);
         if(n<3){
             
     $('video').remove();
@@ -237,7 +245,28 @@ function goToNext(){
     $("#trialNum").replaceWith("<span id='trialNum'>" + (n+1) + "/3</span>");
     } 
         else {
+//            $(".next").attr({
+//                "onclick": "sc2.html"
+//            });
             console.log("if judge");
+            showTwine();
+            $('.activity_panel').hide();
+            $('#twine').show();
+//            const rows = [inputArray, checkSeconds, nextSeconds];
+//            let csvContent = "data:text/csv;charset=utf-8,";
+//            rows.forEach(function(rowArray){
+//                let row = rowArray.join(",");
+//                csvContent += row + "\r\n";
+//            }); 
+//            
+//            var encodedUri = encodeURI(csvContent);
+//            var link = document.createElement("a");
+//            link.setAttribute("href", encodedUri);
+//            link.setAttribute("download", "my_data.csv");
+//            link.innerHTML= "Click Here to download";
+//            document.body.appendChild(link); // Required for FF
+//
+//            link.click(); // This will download the data file named "my_data.csv".
         }
     }
 
