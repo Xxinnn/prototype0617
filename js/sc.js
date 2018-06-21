@@ -2,10 +2,42 @@ var n=0;
 var m=0;
 var error=0;
 var points=0;
+//var totalPoints;
+//var totalErrors;
 //window.onload = function() {
 //    var audio = document.getElementById('audio');
 //    audio.play();
 //}
+
+//var retrievedObject = localStorage.getItem('testObject1');
+var totalPoints = parseInt(localStorage.getItem("totalPoints"));
+var totalErrors = parseInt(localStorage.getItem("totalErrors"));
+//var totalPoints= localStorage.getItem('totalPoints');;
+//var totalErrors= localStorage.getItem('totalErrors');;
+//console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
+//console.log(retrievedObject);
+console.log(totalPoints);
+console.log(totalErrors);
+
+$("#wholePoints").replaceWith("<span id='wholePoints'>"+ totalPoints + " points</span>");
+$("#spanPoints").replaceWith("<span id='spanPoints'>"+ totalPoints + " points</span>");
+
+if (totalErrors==1) {
+        loseHeart(1);
+    }
+    else if (totalErrors==2) {
+        loseHeart(1);
+    loseHeart(2);
+    }
+    else if(totalErrors==3) {
+        loseHeart(1);
+        loseHeart(2);
+    loseHeart(3);
+    }
+//retrievedObject = retrievedObject+1;
+
+
 
 function playSound(path) {
   // audio supported?
@@ -126,7 +158,7 @@ function submitAnswer(){
         $(".type").css("border","2px solid red");
 //        video.src = 'SC/Videos/Harmless_Base_Wrong.mp4';
         video.src = 'SC/Videos/' + words[n] + "_" + parts[0] + '_Wrong.mp4';
-        error=error+1;
+        totalErrors=totalErrors+1;
         //loseHeart(n+1);
         setTimeout(showVideo, 1500);
         console.log("No");
@@ -136,7 +168,7 @@ function submitAnswer(){
         $(".type").css("border","2px solid red");
         video.src = 'SC/Videos/' + words[n] + '_' + parts[2] + '_Wrong_' + less[0] + '.mp4';
 //        video.src = 'SC/Videos/Harmless_Suffix_Wrong_les.mp4';
-        error=error+1;
+        totalErrors=totalErrors+1;
         //loseHeart(n+1);
         setTimeout(showVideo, 1500);
         console.log("NOw")
@@ -146,7 +178,7 @@ function submitAnswer(){
         $(".type").css("border","2px solid red");
         video.src = 'SC/Videos/' + words[n] + '_' + parts[2] + '_Wrong_' + less[1] + '.mp4';
 //        video.src = 'SC/Videos/Harmless_Suffix_Wrong_less.mp4';
-        error=error+1;
+        totalErrors=totalErrors+1;
         //loseHeart(n+1);
         setTimeout(showVideo, 1500);
         console.log("NO");
@@ -157,7 +189,7 @@ function submitAnswer(){
         video.src = 'SC/Videos/' + words[n] + '_' + parts[1] + '_Wrong.mp4';
 
 //        video.src = 'SC/Videos/Harmless_All_Wrong.mp4';
-        error=error+1;
+        totalErrors=totalErrors+1;
         //loseHeart(n+1);
         setTimeout(showVideo, 1500);
         console.log("NOO")
@@ -166,9 +198,9 @@ function submitAnswer(){
     else if (arrayUser[0] == arrayCorrect[m] && arrayUser[1] == arrayCorrect[m+1]){
         $(".plusPoints").css("display","block");
         $(".type").css("border","2px solid green");
-        points=points+10;
-        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ points + " points</span>");
-        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ points + " points</span>");
+        totalPoints=totalPoints+10;
+        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ totalPoints + " points</span>");
+        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ totalPoints + " points</span>");
         console.log("correct");
     } //correct
     
@@ -199,13 +231,13 @@ function submitAnswer(){
     console.log("if judge");
 }
     
-    if (error==1) {
+    if (totalErrors==1) {
         loseHeart(1);
     }
-    else if (error==2) {
+    else if (totalErrors==2) {
     loseHeart(2);
     }
-    else if(error==3) {
+    else if(totalErrors==3) {
     loseHeart(3);
     }
 }
@@ -248,10 +280,20 @@ function goToNext(){
 //            $(".next").attr({
 //                "onclick": "sc2.html"
 //            });
+            //totalPoints=totalPoints+points;
+            //totalErrors=totalErrors+error;
+            console.log(totalPoints);
+            console.log(totalErrors);
             console.log("if judge");
             showTwine();
             $('.activity_panel').hide();
             $('#twine').show();
+            
+            localStorage.setItem('totalPoints', totalPoints);
+        localStorage.setItem('totalErrors', totalErrors);
+                     console.log("set the localStorage");
+
+
 //            const rows = [inputArray, checkSeconds, nextSeconds];
 //            let csvContent = "data:text/csv;charset=utf-8,";
 //            rows.forEach(function(rowArray){

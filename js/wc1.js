@@ -4,11 +4,16 @@ var i=0; //word in one trial
 var t=0;
 var error=0;
 var points=0;
+var totalPoints;
+var totalErrors;
 //window.onload = function() {
 //    var audio = document.getElementById('audio');
 //    audio.play();
 //}
 //debugger;
+
+//var dataArray = localStorage.getItem("data");
+//  console.log(dataArray);
 
 function playSound(path) {
   // audio supported?
@@ -22,9 +27,9 @@ function playSound(path) {
 //            word challenge
 
 function loseHeart(i){
-    var heart_i=document.getElementById('heart'+i);
-        heart_i.style.opacity = "0.3";
-        heart_i.style.filter  = 'alpha(opacity=30)';
+    var heart=document.getElementById('heart'+i);
+        heart.style.opacity = "0.3";
+        heart.style.filter  = 'alpha(opacity=30)';
 }
 
 function wcTrial(i){
@@ -231,9 +236,34 @@ function goToNext(){
     }           
 }
     else {
+        totalPoints=points;
+        totalErrors=error;
         console.log("if judge");
         showTwine();
         $('.activity_panel').hide();
         $('#twine').show();
+        
+        localStorage.setItem('totalPoints', totalPoints);
+        localStorage.setItem('totalErrors', totalErrors);
+//        
+//        console.log("set the localStorage");
+//        var testObject1 = { 'totalPoints': totalPoints} 
+//        var testObject2 = {'totalErrors': totalErrors };
+//        
+//
+//        // Put the object into storage
+//        localStorage.setItem('testObject1', JSON.stringify(testObject1));
+//
+//        // Retrieve the object from storage
+//        var retrievedObject = localStorage.getItem('testObject1');
+//
+//        console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
+//        localStorage.setItem("data", {totalPoints}, {totalErrors});
+         console.log("set the localStorage");
     }
 }
+
+//localStorage.setItem("data", [totalPoints, totalErrors]);
+//console.log("set the localStorage");
+
