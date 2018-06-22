@@ -32,6 +32,172 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
+<script src="js/jquery.min.js"></script>
+<script src="papaparse.min.js"></script>
+    <script>
+        $(window).load(function() {
+            window.onmessage=function(e){
+                if(e.data == 'show_twine') {
+                    alert('It works');
+                }
+            }
+            //Binding click events to lately loaded htmlelements
+            
+
+            
+            var answer;
+            var answerArray=[];
+            var seconds;
+            var storySeconds=[];
+            var myData = [];
+            $('body').on({
+                mousedown: function() { 
+                    answer=($(this).attr('data-passage'));
+                    console.log(answer);
+        
+                    answerArray.push(answer);
+//                    myTimeVariable.now()
+                    seconds = new Date().getTime() / 1000 | 0;
+                    console.log(seconds);
+                                myData.push([answer, seconds]);
+                    storySeconds.push(seconds);
+                   
+                    var data = Papa.unparse(myData);
+                        //var filename = 'easy.csv';
+                        var saveData = (function () {
+                           var a = document.createElement("a");
+                           document.body.appendChild(a);
+                           a.style = "display: none";
+                           return function (data, fileName) {
+                               var blob = new Blob([data], {type: "octet/stream"}),
+                                   url = window.URL.createObjectURL(blob);
+                               a.href = url;
+                               a.download = fileName;
+                               a.click();
+                               window.URL.revokeObjectURL(url);
+                           };
+                       }());
+                    
+                    //WC1
+                                        
+                    if(answer==='Hello, Robby'){
+                        window.parent.postMessage(
+                        {
+                            event_id: 'my_cors_message_wc1',
+                            data: {
+                                v1: myData, 
+                                v2: 'value2'
+                            }
+                        }, 
+                        "*" //or "www.parentpage.com"
+                        ); 
+//                        var filename = 'wc1.csv';
+//                        saveData(data, filename);
+                    } 
+                    
+//                    if(answer==='Go on'){
+//                        var filename = 'wc1.csv';
+//                        saveData(data, filename);
+//                    }
+                    
+                    //SC1
+                    if(answer==='Okay, how do I get us to safety?'){
+                        window.parent.postMessage(
+                        {
+                            event_id: 'my_cors_message_sc1',
+                            data: {
+                                v1: myData, 
+                                v2: 'value2'
+                            }
+                        }, 
+                        "*" //or "www.parentpage.com"
+                        ); 
+                        var filename = 'sc1.csv';
+                        saveData(data, filename);
+//                        var data = Papa.unparse(myData);
+//                        var filename = 'wc1.csv';
+//                        saveData(data, filename);
+                    } 
+                    if(answer==='Continue'){
+//                        var filename = 'sc1.csv';
+//                        saveData(data, filename);
+                    }
+                    
+                    //WC2
+                    if(answer==='Got it, Robby!'){
+                        window.parent.postMessage(
+                        {
+                            event_id: 'my_cors_message_wc2',
+                            data: {
+                                v1: myData, 
+                                v2: 'value2'
+                            }
+                        }, 
+                        "*" //or "www.parentpage.com"
+                        ); 
+                        var filename = 'wc2.csv';
+                        saveData(data, filename);
+//                        var data = Papa.unparse(myData);
+//                        var filename = 'wc1.csv';
+//                        saveData(data, filename);
+                    } 
+                    if(answer==='You made it to safety'){
+//                        var filename = 'wc2.csv';
+//                        saveData(data, filename);
+                    }
+                    
+                    //SC2
+                    if(answer==='Okay, how do I do that?'){
+                        window.parent.postMessage(
+                        {
+                            event_id: 'my_cors_message_sc2',
+                            data: {
+                                v1: myData, 
+                                v2: 'value2'
+                            }
+                        }, 
+                        "*" //or "www.parentpage.com"
+                        ); 
+                        var filename = 'sc2.csv';
+                        saveData(data, filename);
+//                        var data = Papa.unparse(myData);
+//                        var filename = 'wc1.csv';
+//                        saveData(data, filename);
+                    } 
+                    if(answer==='Go on!'){
+//                        var filename = 'sc2.csv';
+//                        saveData(data, filename);
+                    }
+                    
+                    if(answer==='Restart'){
+                        
+                        var filename = 'end.csv';
+                        
+                        saveData(data, filename);
+                    }
+                    
+                    window.top.postMessage("bye","*"); }
+                
+            }, '.link-internal');
+            
+            window.addEventListener('message', function(event) {
+            if(event.data.event_id === 'show_twine'){
+                myData = event.data.data.v1;
+                //alert("We passed the data");
+            }
+            //breakPoint="here";
+                             
+        });
+            
+            
+            
+                //'hover','.link-internal', function(){
+            //alert('document is always there');
+        });
+        
+        
+        //});
+    </script>
 <script id="script-libraries" type="text/javascript">
 if(document.head&&document.addEventListener&&document.querySelector&&Object.create&&Object.freeze&&JSON){document.documentElement.setAttribute("data-init", "loading");
 /*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js */
@@ -331,170 +497,5 @@ Save.clear(),c()}:null)),!0}return t(L10n.get("savesIncapable")),!1}function d()
 	</script>
 </body>
 
-<script src="js/jquery.min.js"></script>
-<script src="papaparse.min.js"></script>
-    <script>
-        $(window).load(function() {
-            window.onmessage=function(e){
-                if(e.data == 'show_twine') {
-                    alert('It works');
-                }
-            }
-            //Binding click events to lately loaded htmlelements
-            
 
-            
-            var answer;
-            var answerArray=[];
-            var seconds;
-            var storySeconds=[];
-            var myData = [];
-            $('body').on({
-                mousedown: function() { 
-                    answer=($(this).attr('data-passage'));
-                    console.log(answer);
-        
-                    answerArray.push(answer);
-//                    myTimeVariable.now()
-                    seconds = new Date().getTime() / 1000 | 0;
-                    console.log(seconds);
-                                myData.push([answer, seconds]);
-                    storySeconds.push(seconds);
-                   
-                    var data = Papa.unparse(myData);
-                        //var filename = 'easy.csv';
-                        var saveData = (function () {
-                           var a = document.createElement("a");
-                           document.body.appendChild(a);
-                           a.style = "display: none";
-                           return function (data, fileName) {
-                               var blob = new Blob([data], {type: "octet/stream"}),
-                                   url = window.URL.createObjectURL(blob);
-                               a.href = url;
-                               a.download = fileName;
-                               a.click();
-                               window.URL.revokeObjectURL(url);
-                           };
-                       }());
-                    
-                    //WC1
-                                        
-                    if(answer==='Hello, Robby'){
-                        window.parent.postMessage(
-                        {
-                            event_id: 'my_cors_message_wc1',
-                            data: {
-                                v1: myData, 
-                                v2: 'value2'
-                            }
-                        }, 
-                        "*" //or "www.parentpage.com"
-                        ); 
-//                        var filename = 'wc1.csv';
-//                        saveData(data, filename);
-                    } 
-                    
-//                    if(answer==='Go on'){
-//                        var filename = 'wc1.csv';
-//                        saveData(data, filename);
-//                    }
-                    
-                    //SC1
-                    if(answer==='Okay, how do I get us to safety?'){
-                        window.parent.postMessage(
-                        {
-                            event_id: 'my_cors_message_sc1',
-                            data: {
-                                v1: myData, 
-                                v2: 'value2'
-                            }
-                        }, 
-                        "*" //or "www.parentpage.com"
-                        ); 
-                        var filename = 'sc1.csv';
-                        saveData(data, filename);
-//                        var data = Papa.unparse(myData);
-//                        var filename = 'wc1.csv';
-//                        saveData(data, filename);
-                    } 
-                    if(answer==='Continue'){
-//                        var filename = 'sc1.csv';
-//                        saveData(data, filename);
-                    }
-                    
-                    //WC2
-                    if(answer==='Got it, Robby!'){
-                        window.parent.postMessage(
-                        {
-                            event_id: 'my_cors_message_wc2',
-                            data: {
-                                v1: myData, 
-                                v2: 'value2'
-                            }
-                        }, 
-                        "*" //or "www.parentpage.com"
-                        ); 
-                        var filename = 'wc2.csv';
-                        saveData(data, filename);
-//                        var data = Papa.unparse(myData);
-//                        var filename = 'wc1.csv';
-//                        saveData(data, filename);
-                    } 
-                    if(answer==='You made it to safety'){
-//                        var filename = 'wc2.csv';
-//                        saveData(data, filename);
-                    }
-                    
-                    //SC2
-                    if(answer==='Okay, how do I do that?'){
-                        window.parent.postMessage(
-                        {
-                            event_id: 'my_cors_message_sc2',
-                            data: {
-                                v1: myData, 
-                                v2: 'value2'
-                            }
-                        }, 
-                        "*" //or "www.parentpage.com"
-                        ); 
-                        var filename = 'sc2.csv';
-                        saveData(data, filename);
-//                        var data = Papa.unparse(myData);
-//                        var filename = 'wc1.csv';
-//                        saveData(data, filename);
-                    } 
-                    if(answer==='Go on!'){
-//                        var filename = 'sc2.csv';
-//                        saveData(data, filename);
-                    }
-                    
-                    if(answer==='Restart'){
-                        
-                        var filename = 'end.csv';
-                        
-                        saveData(data, filename);
-                    }
-                    
-                    window.top.postMessage("bye","*"); }
-                
-            }, '.link-internal');
-            
-            window.addEventListener('message', function(event) {
-            if(event.data.event_id === 'show_twine'){
-                myData = event.data.data.v1;
-                //alert("We passed the data");
-            }
-            //breakPoint="here";
-                             
-        });
-            
-            
-            
-                //'hover','.link-internal', function(){
-            //alert('document is always there');
-        });
-        
-        
-        //});
-    </script>
 </html>
