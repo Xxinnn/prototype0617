@@ -6,7 +6,7 @@ h2{
 
 body {
     font-size: 24px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     background-color: #E9EBEC;
 }
 
@@ -34,11 +34,14 @@ nav ul li{
 }
 nav ul li a{
     font-size: 1.2em;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin-right: 20px;
 }
 ul li.point {
-    text-align: right;
+    float: right;
+}
+ul li.hearts{
+    float: right;
 }
 iframe {
     grid-column: 3 / 11;
@@ -54,6 +57,7 @@ iframe {
     padding: 25px;
 }
 
+/*
 * {
     box-sizing: border-box;
 }
@@ -69,6 +73,10 @@ iframe {
     content: "";
     clear: both;
     display: table;
+}
+*/
+.gamification{
+    height: 40px;
 }
 
 .robby{
@@ -214,12 +222,13 @@ video{
     height: 200px;
     /* background: red; */
     float: left;
+    margin-right: 50px;
 }
 #responseChoices {
     margin-left: 15%;
     height: 200px;
     /* background: blueviolet; */
-    text-align: center;
+    text-align: left;
 }
 #responseChoices > label{
     display: block;

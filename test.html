@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>
+            prototype
+        </title>
+        <link rel="stylesheet" type="text/css" href="reset.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
+    </head>
+    
+    <body>
+<!--
+      <audio controls autoplay src="SC/SC_intro.wav" id="audio">
+          <p>If you can read this, your browser does not support the audio element.</p>
+      </audio>
+-->
+       <nav>
+            <ul>
+                <li>
+                    <a>Home</a>
+                </li>
+                <li>
+                    <a>>&emsp;Stories</a>
+                </li>
+                <li>
+                    <a>>&emsp;Spelling Challenge</a>
+                </li>
+                <li class="point">
+                    <a>0 Point</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="container">
+<!--           <div class="activity_panel">-->
+               <iframe src="prototype0617.html" id="twine" width=750 height=550>
+                   
+               </iframe>
+<!--              number of trial-->
+<!--               <div class="scTrial" id="scTrial">-->
+<!--                  <span>1/3</span>-->
+<!--               </div>-->
+<!--               gamification element-->
+<!--
+               <div class="gamification">
+                   <div class="box" id="points">
+                       <span id="spanPoints">0 point</span>
+                   </div>
+                   <div class="box" id="hearts">
+                       <img src="img/heart.png" id="heart1" width=30px;>
+                       <img src="img/heart.png" id="heart2" width=30px;>
+                       <img src="img/heart.png" id="heart3" width=30px;>
+                   </div>
+               </div>
+-->
+<!--               robby image-->
+<!--
+               <div id="robby">
+                   <img src="img/roboto-logo.svg" class="robby" id="img_robby" width=150px;>
+                   speech bubble
+                   <hgroup class="speech-bubble">
+	                    <p>Click me to hear the word.</p>
+                   </hgroup>
+               </div>
+-->
+               
+<!--               correct-->
+<!--
+               <div class="plusPoints">
+                    <span>+ 10 points</span>
+                    <i class="far fa-check-circle fa-2x"></i>
+               </div>
+               incorrect
+               <div class="minusPoints">
+                    <img src="img/broken-heart.png" class="brokenHeart" width=50px>
+                    <i class="far fa-times-circle fa-2x"></i>
+               </div>
+               
+               <div id="video">
+-->
+<!--                  use as an example-->
+<!--
+                   <video width="320" height="240" autoplay>
+                      <source src="SC/Videos/Cheerful_All_Wrong.mp4" type="video/mp4">
+                   </video>
+-->
+<!--
+               </div>
+               
+               <input type="text" name="s1" id="s1" class="type" placeholder="Type here">
+               <input type="button" value="Check" class="check" onclick="submitAnswer()">
+-->
+<!--               <input type="button" value="Next" class="next" onclick="goToNext()">-->
+<!--           </div>-->
+            
+        </div>
+        <span id="click">
+            click
+        </span>    
+        </body>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/sc.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('#click').on('click',function(){
+            var myIframe=$('#twine')[0];
+            myIframe.contentWindow.postMessage('hello','*');
+        });
+        window.onmessage=function(e){
+                if(e.data == 'bye') {
+                    console.log('It works');
+                }
+            }
+    });
+        
+//        var array=[];
+//        array.push();
+//        console.log(array);
+        
+        //var seconds = new Date().getTime() / 1000;
+//        if(answer==='Hello Robby')  {
+//            $('#twine').hide();
+//        }
+        window.addEventListener('message', function(event) {
+            if(event.data.event_id === 'my_cors_message'){
+                $('#twine').hide();
+                console.log(event.data.data);
+            }
+        });
+
+    </script>
+</html>

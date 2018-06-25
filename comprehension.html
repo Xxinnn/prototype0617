@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>
+            prototype
+        </title>
+        <link rel="stylesheet" type="text/css" href="reset.css">
+        <link rel="stylesheet" type="text/css" href="css/comprehension.css">
+        
+<!--        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">-->
+       <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
+    </head>
+    
+    <body>
+      
+       <nav>
+            <ul>
+                <li>
+                    <a>Home</a>
+                </li>
+                <li>
+                    <a>>&emsp;Stories</a>
+                </li>
+                
+                
+                <li class="hearts">
+                    <img src="img/heart.png" id="heart1" width=25px;>
+                    <img src="img/heart.png" id="heart2" width=25px;>
+                    <img src="img/heart.png" id="heart3" width=25px;>
+                </li>
+                <li class="point">
+                    <a><span id="wholePoints">0 Point</span></a>
+                </li>
+            </ul>
+        </nav>
+        <div class="container">
+          <iframe src="prototype_0621.html" id="twine" width=817 height=577>
+                   
+             </iframe>
+           <div class="activity_panel">
+<!--              number of trial-->
+               
+<!--               gamification element-->
+<!--
+               <div class="gamification">
+                   <div class="box" id="points">
+                       <span id="spanPoints">0 point</span>
+                   </div>
+                   <div class="box" id="hearts">
+                       <img src="img/heart.png" id="heart1" width=30px;>
+                       <img src="img/heart.png" id="heart2" width=30px;>
+                       <img src="img/heart.png" id="heart3" width=30px;>
+                   </div>
+               </div>
+-->
+<!--               robby image-->
+                <div class="comprehension">
+                   <div>
+                       <p class="spec">As you wait for your vehicle to approach your destination, you have a chance to earn some extra points. If you’d like, you can answer this question for 30 bonus points. These points might help you at the end of the story!
+                       </p><br>
+                       <p class="question">Why did you need to enter the secret code words at the beginning of the story?</p><br>
+                       
+                       <div id="answer">
+                        <label><input type="radio" name="cq_choices" value="a">
+                        <span id="word">To activate Robby.</span></label>
+                        <label><input type="radio" name="cq_choices" value="b">
+                        <span id="word">To start the vehicle.</span>
+                        </label>
+                        <label><input type="radio" name="cq_choices" value="c">
+                        <span id="word">To find food.</span>
+                        </label>
+                        <label><input type="radio" name="cq_choices" value="d">
+                        <span id="word">To avoid danger</span>
+                        </label>
+                        <label><input type="radio" name="cq_choices" value="e">
+                        <span id="word">No thanks, I don't want to answer.</span>
+                        </label>
+                        </div>
+<!--
+                       <ul class="answer">
+                           <li>
+                               <a href="">To activate Robby.</a>
+                           </li>
+                           <li>
+                              <a href="">To start the vehicle.</a>
+                           </li>
+                           <li>
+                              <a href="">To find food.</a>
+                           </li>
+                           <li>
+                              <a href="">To avoid danger</a>
+                           </li>
+                           <li>       
+                              <a href="">No thanks, I don't want to answer.</a>
+                           </li>
+                       </ul>
+-->
+                       
+                   </div>
+                    
+
+                    
+                </div>
+
+               
+<!--               correct-->
+               <div class="plusPoints">
+                    <span>+ 30 points</span>
+                     <i class="far fa-check-circle fa-2x"></i> 
+               </div>
+<!--               incorrect-->
+               <div class="minusPoints">
+                    
+                     <i class="far fa-times-circle fa-2x"></i> 
+               </div>
+               
+               
+               
+               
+               <input type="button" value="Check" class="check" onclick="submitAnswer()">
+           </div>
+            
+        </div>
+    </body>
+    <script src="js/jquery.min.js"></script>
+    
+    <script src="js/papaparse.min.js"></script>
+    <script>
+        var myData = []
+    $(document).ready(function(){
+        //$('#twine').hide();
+        $('.activity_panel').show();
+        $('#click').on('click',function(){
+            var myIframe=$('#twine')[0];
+            myIframe.contentWindow.postMessage('hello','*');
+        });
+        window.onmessage=function(e){
+                if(e.data == 'bye') {
+                    console.log('It works');
+                }
+            }
+    });
+        
+//        var array=[];
+//        array.push();
+//        console.log(array);
+        
+        //var seconds = new Date().getTime() / 1000;
+//        if(answer==='Hello Robby')  {
+//            $('#twine').hide();
+//        }
+        window.addEventListener('message', function(event) {
+            if(event.data.event_id === 'my_cors_message_cq'){
+                $('#twine').hide();
+                $('.activity_panel').show();
+                console.log(event.data.data);
+                myData = event.data.data.v1;
+            }
+            //breakPoint="here";
+            
+            if(event.data.event_id === 'my_cors_message_wc2'){
+                //$('#twine').hide();
+                location.href = "wc2.html";
+                //window.open("sc1.html","_self");
+                //$('.activity_panel').show();
+                console.log(event.data.data);
+                myData = event.data.data.v1;
+            }
+        });
+        
+        function pushWord(word) {
+            seconds = new Date().getTime() / 1000 | 0;
+            myData.push([word, seconds])
+        }
+        
+        function showTwine() {
+             var myIframe=$('#twine')[0];
+            myIframe.contentWindow.postMessage(
+                        {
+                            event_id: 'show_twine',
+                            data: {
+                                v1: myData, 
+                                v2: 'value2'
+                            }
+                        }, 
+                        "*" //or "www.parentpage.com"
+                        ); 
+        }
+
+//        if(answer==='Continue'){
+//            var filename = 'easy.csv';
+//            saveData(data, filename);
+//        }
+    </script>
+    <script src="js/comprehension.js"></script>
+</html>

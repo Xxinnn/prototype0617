@@ -10,7 +10,9 @@
         <link rel="stylesheet" type="text/css" href="reset.css">
         <link rel="stylesheet" type="text/css" href="style.css">
         
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<!--        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">-->
+       <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+       
         
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
@@ -30,8 +32,10 @@
                 <li>
                     <a>>&emsp;Stories</a>
                 </li>
-                <li>
-                    <a>>&emsp;Spelling Challenge</a>
+                <li class="hearts">
+                    <img src="img/heart.png" id="heart1" width=25px;>
+                    <img src="img/heart.png" id="heart2" width=25px;>
+                    <img src="img/heart.png" id="heart3" width=25px;>
                 </li>
                 <li class="point">
                     <a>
@@ -41,7 +45,7 @@
             </ul>
         </nav>
         <div class="container">
-          <iframe src="prototype_0621.html" id="twine" width=900 height=550>
+          <iframe src="prototype_0621.html" id="twine" width=817 height=577>
                    
      </iframe>
            <div class="activity_panel">
@@ -51,6 +55,7 @@
                </div>
 <!--               gamification element-->
                <div class="gamification">
+<!--
                    <div class="box" id="points">
                        <span id="spanPoints">0 point</span>
                    </div>
@@ -59,6 +64,7 @@
                        <img src="img/heart.png" id="heart2" width=30px;>
                        <img src="img/heart.png" id="heart3" width=30px;>
                    </div>
+-->
                </div>
 <!--               robby image-->
                <div id="robby">
@@ -124,16 +130,26 @@
 //        }
         window.addEventListener('message', function(event) {
             if(event.data.event_id === 'my_cors_message_sc1'){
-                $('#twine').hide();
-                $('.activity_panel').show();
+                setTimeout(
+                    function(){
+                        $('#twine').hide();
+                        $('.activity_panel').show();
+                    },300);
+                
+                
                 console.log(event.data.data);
                 myData = event.data.data.v1;
             }
-            breakPoint="here";
+            //breakPoint="here";
             
-            if(event.data.event_id === 'my_cors_message_wc2'){
+            if(event.data.event_id === 'my_cors_message_cq'){
                 //$('#twine').hide();
-                location.href = "wc2.html";
+                
+                setTimeout(
+                    function(){
+                        location.href = "comprehension.html";
+                    },300);
+                
                 //window.open("sc1.html","_self");
                 //$('.activity_panel').show();
                 console.log(event.data.data);

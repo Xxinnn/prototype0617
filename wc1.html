@@ -10,7 +10,8 @@
         <link rel="stylesheet" type="text/css" href="reset.css">
         <link rel="stylesheet" type="text/css" href="style_wc.css">
         
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<!--        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">-->
+       <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
@@ -29,15 +30,20 @@
                 <li>
                     <a>>&emsp;Stories</a>
                 </li>
-                <li>
-                    <a>>&emsp;Spelling Challenge</a>
+                <li class="hearts">
+                    <img src="img/heart.png" id="heart1" width=25px;>
+                    <img src="img/heart.png" id="heart2" width=25px;>
+                    <img src="img/heart.png" id="heart3" width=25px;>
                 </li>
                 <li class="point">
-                    <a><span id="wholepoints">0 Point</span></a>
+                    <a><span id="wholePoints">0 Point</span></a>
                 </li>
             </ul>
         </nav>
         <div class="container">
+          <iframe src="prototype_0621.html" id="twine" width=817 height=577>
+                   
+             </iframe>
            <div class="activity_panel">
 <!--              number of trial-->
                <div class="wcTrial" id="wcTrial">
@@ -45,6 +51,7 @@
                </div>
 <!--               gamification element-->
                <div class="gamification">
+<!--
                    <div class="box" id="points">
                        <span id="spanPoints">0 point</span>
                    </div>
@@ -53,6 +60,7 @@
                        <img src="img/heart.png" id="heart2" width=30px;>
                        <img src="img/heart.png" id="heart3" width=30px;>
                    </div>
+-->
                </div>
 <!--               robby image-->
                 <div class="robbyAndChoicesWrapper">
@@ -106,4 +114,79 @@
     </body>
     <script src="js/jquery.min.js"></script>
     <script src="js/wc1.js"></script>
+    <script src="js/papaparse.min.js"></script>
+    <script>
+        var myData = []
+    $(document).ready(function(){
+        $('.activity_panel').hide();
+        $('#click').on('click',function(){
+            var myIframe=$('#twine')[0];
+            myIframe.contentWindow.postMessage('hello','*');
+        });
+        window.onmessage=function(e){
+                if(e.data == 'bye') {
+                    console.log('It works');
+                }
+            }
+    });
+        
+//        var array=[];
+//        array.push();
+//        console.log(array);
+        
+        //var seconds = new Date().getTime() / 1000;
+//        if(answer==='Hello Robby')  {
+//            $('#twine').hide();
+//        }
+        window.addEventListener('message', function(event) {
+            if(event.data.event_id === 'my_cors_message_wc1'){
+                setTimeout(
+                    function(){
+                        $('#twine').hide();
+                        $('.activity_panel').show();
+                    },300);
+                
+                console.log(event.data.data);
+                myData = event.data.data.v1;
+            }
+            //breakPoint="here";
+            
+            if(event.data.event_id === 'my_cors_message_sc1'){
+                //$('#twine').hide();
+                setTimeout(
+                    function(){
+                        location.href = "sc1.html";
+                    },300);
+                
+                //window.open("sc1.html","_self");
+                //$('.activity_panel').show();
+                console.log(event.data.data);
+                myData = event.data.data.v1;
+            }
+        });
+        
+        function pushWord(word) {
+            seconds = new Date().getTime() / 1000 | 0;
+            myData.push([word, seconds])
+        }
+        
+        function showTwine() {
+             var myIframe=$('#twine')[0];
+            myIframe.contentWindow.postMessage(
+                        {
+                            event_id: 'show_twine',
+                            data: {
+                                v1: myData, 
+                                v2: 'value2'
+                            }
+                        }, 
+                        "*" //or "www.parentpage.com"
+                        ); 
+        }
+
+//        if(answer==='Continue'){
+//            var filename = 'easy.csv';
+//            saveData(data, filename);
+//        }
+    </script>
 </html>

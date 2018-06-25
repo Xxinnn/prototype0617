@@ -89,6 +89,8 @@ wordlist[0]=true;
     
 
 function submitAnswer(){
+    const next="Next";
+    pushWord(next);
     if(trial==1) {
         console.log('first click');
     input = $("input[name='WC_choices']:checked").val();

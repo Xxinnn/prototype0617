@@ -14,7 +14,10 @@ var totalErrors;
 
 //var dataArray = localStorage.getItem("data");
 //  console.log(dataArray);
-
+//var time = localStorage.getItem("myData");
+//console.log(time);
+//var startTime = parseInt(localStorage.getItem("start"));
+//pushWord(startTime);
 function playSound(path) {
   // audio supported?
   if (typeof window.Audio === 'function') {
@@ -204,6 +207,8 @@ function submitAnswer(){
 
 
 function goToNext(){
+    const next="Next";
+    pushWord(next);
 //        console.log('this is go to next');
         if(trial<3){
             

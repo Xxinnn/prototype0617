@@ -112,7 +112,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                         }, 
                         "*" //or "www.parentpage.com"
                         ); 
-                        var filename = 'sc1.csv';
+                        var filename = 'wc1.csv';
                         saveData(data, filename);
 //                        var data = Papa.unparse(myData);
 //                        var filename = 'wc1.csv';
@@ -122,6 +122,26 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //                        var filename = 'sc1.csv';
 //                        saveData(data, filename);
                     }
+                    //comprehension question
+                    if(answer==='There it is!'){
+                        window.parent.postMessage(
+                        {
+                            event_id: 'my_cors_message_cq',
+                            data: {
+                                v1: myData, 
+                                v2: 'value2'
+                            }
+                        }, 
+                        "*" //or "www.parentpage.com"
+                        ); 
+                        //var filename = 'sc1.csv';
+                        //saveData(data, filename);
+//                        var data = Papa.unparse(myData);
+//                        var filename = 'wc1.csv';
+//                        saveData(data, filename);
+                        var filename = 'sc1.csv';
+                        saveData(data, filename);
+                    } 
                     
                     //WC2
                     if(answer==='Got it, Robby!'){
@@ -135,7 +155,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                         }, 
                         "*" //or "www.parentpage.com"
                         ); 
-                        var filename = 'wc2.csv';
+                        var filename = 'cq.csv';
                         saveData(data, filename);
 //                        var data = Papa.unparse(myData);
 //                        var filename = 'wc1.csv';
@@ -158,7 +178,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                         }, 
                         "*" //or "www.parentpage.com"
                         ); 
-                        var filename = 'sc2.csv';
+                        var filename = 'wc2.csv';
                         saveData(data, filename);
 //                        var data = Papa.unparse(myData);
 //                        var filename = 'wc1.csv';
@@ -171,7 +191,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     
                     if(answer==='Restart'){
                         
-                        var filename = 'end.csv';
+                        var filename = 'sc2.csv';
                         
                         saveData(data, filename);
                     }
@@ -261,6 +281,7 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 <style id="style-ui" type="text/css">#ui-dialog-body.settings [id|=setting-body]{display:table;width:100%}#ui-dialog-body.settings [id|=setting-label]{display:table-cell;padding:.4em 2em .4em 0}#ui-dialog-body.settings [id|=setting-label]+div{display:table-cell;min-width:8em;text-align:right;vertical-align:middle;white-space:nowrap}#ui-dialog-body.list{padding:0;min-width:140px}#ui-dialog-body.list ul{margin:0;padding:0;list-style:none;border:1px solid transparent}#ui-dialog-body.list li{margin:0}#ui-dialog-body.list li:not(:first-child){border-top:1px solid #444}#ui-dialog-body.list li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-decoration:none}#ui-dialog-body.list li a:hover{background-color:#333;border-color:#eee}#ui-dialog-body.saves{padding:0 0 1px}#ui-dialog-body.saves>:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves table{border-spacing:0;min-width:340px;width:100%}#ui-dialog-body.saves tr:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves td{padding:.33em .33em}#ui-dialog-body.saves td:first-child{min-width:1.5em;text-align:center}#ui-dialog-body.saves td:nth-child(3){line-height:1.2}#ui-dialog-body.saves td:last-child{text-align:right}#ui-dialog-body.saves .empty{color:#999}#ui-dialog-body.saves .datestamp{font-size:75%}#ui-dialog-body.saves ul.buttons li{padding:.4em}#ui-dialog-body.saves ul.buttons>li+li>button{margin-left:.2em}#ui-dialog-body.saves ul.buttons li:last-child{float:right}#ui-dialog-body.settings div[id|=header-body]{margin:1em 0}#ui-dialog-body.settings div[id|=header-body]:first-child{margin-top:0}#ui-dialog-body.settings div[id|=header-body]:not(:first-child){border-top:1px solid #444;padding-top:1em}#ui-dialog-body.settings div[id|=header-body]>*{margin:0}#ui-dialog-body.settings h2[id|=header-heading]{font-size:1.375em}#ui-dialog-body.settings p[id|=header-label]{font-size:87.5%}#ui-dialog-body.settings div[id|=setting-body]+div[id|=setting-body]{margin:.5em 0}#ui-dialog-body.settings [id|=setting-control]{white-space:nowrap}#ui-dialog-body.settings button[id|=setting-control]{color:#eee;background-color:transparent;border:1px solid #444;padding:.4em}#ui-dialog-body.settings button[id|=setting-control]:hover{background-color:#333;border-color:#eee}#ui-dialog-body.settings button[id|=setting-control].enabled{background-color:#282;border-color:#4a4}#ui-dialog-body.settings button[id|=setting-control].enabled:hover{background-color:#4a4;border-color:#6c6}#ui-dialog-body.share{min-width:140px}#ui-dialog-body.list a,#ui-dialog-body.settings span[id|=setting-input]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves button[id=saves-clear]:before,#ui-dialog-body.saves button[id=saves-export]:before,#ui-dialog-body.saves button[id=saves-import]:before,#ui-dialog-body.settings button[id|=setting-control].enabled:after,#ui-dialog-body.settings button[id|=setting-control]:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-dialog-body.saves button[id=saves-export]:before{content:"\e829\00a0"}#ui-dialog-body.saves button[id=saves-import]:before{content:"\e82a\00a0"}#ui-dialog-body.saves button[id=saves-clear]:before{content:"\e827\00a0"}#ui-dialog-body.settings button[id|=setting-control]:after{content:"\00a0\00a0\e830"}#ui-dialog-body.settings button[id|=setting-control].enabled:after{content:"\00a0\00a0\e831"}</style>
 <style id="style-ui-bar" type="text/css">#story{margin-left:20em}#ui-bar.stowed~#story{margin-left:4.5em}@media screen and (max-width:1136px){#story{margin-left:19em}#ui-bar.stowed~#story{margin-left:3.5em}}@media screen and (max-width:768px){#story{margin-left:3.5em}}#ui-bar{position:fixed;z-index:50;top:0;left:0;width:17.5em;height:100%;margin:0;padding:0;-webkit-transition:left .2s ease-in;-o-transition:left .2s ease-in;transition:left .2s ease-in}#ui-bar.stowed{left:-15.5em}#ui-bar-body{height:90%;height:calc(100% - 2.5em);margin:2.5em 0;padding:0 1.5em}#ui-bar.stowed #ui-bar-body,#ui-bar.stowed #ui-bar-history{visibility:hidden;-webkit-transition:visibility .2s step-end;-o-transition:visibility .2s step-end;transition:visibility .2s step-end}#ui-bar{background-color:#222;border-right:1px solid #444;text-align:center}#ui-bar-tray{position:absolute;top:.2em;left:0;right:0}#ui-bar a{text-decoration:none}#ui-bar hr{border-color:#444}#ui-bar-history [id|=history],#ui-bar-toggle{font-size:1.2em;line-height:inherit;color:#eee;background-color:transparent;border:1px solid #444}#ui-bar-toggle{display:block;position:absolute;top:0;right:0;border-right:none;padding:.3em .45em .25em}#ui-bar.stowed #ui-bar-toggle{padding:.3em .35em .25em .55em}#ui-bar-toggle:hover{background-color:#444;border-color:#eee}#ui-bar-history{margin:0 auto}#ui-bar-history [id|=history]{padding:.2em .45em .35em}#ui-bar-history #history-jumpto{padding:.2em .665em .35em}#ui-bar-history [id|=history]:not(:first-child){margin-left:1.2em}#ui-bar-history [id|=history]:hover{background-color:#444;border-color:#eee}#ui-bar-history [id|=history]:disabled{color:#444;background-color:transparent;border-color:#444}#ui-bar-body{line-height:1.5;overflow:auto}#ui-bar-body>:not(:first-child){margin-top:2em}#story-title{margin:0;font-size:162.5%}#story-author{margin-top:2em;font-weight:700}#menu ul{margin:1em 0 0;padding:0;list-style:none;border:1px solid #444}#menu ul:empty{display:none}#menu li{margin:0}#menu li:not(:first-child){border-top:1px solid #444}#menu li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-transform:uppercase}#menu li a:hover{background-color:#444;border-color:#eee}#menu a,#ui-bar-history [id|=history],#ui-bar-toggle{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#menu-core li[id|=menu-item] a:before,#ui-bar-history [id|=history],#ui-bar-toggle:before{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-bar-toggle:before{content:"\e81d"}#ui-bar.stowed #ui-bar-toggle:before{content:"\e81e"}#menu-item-saves a:before{content:"\e82b\00a0"}#menu-item-settings a:before{content:"\e82d\00a0"}#menu-item-restart a:before{content:"\e82c\00a0"}#menu-item-share a:before{content:"\e82f\00a0"}</style>
 <style id="style-debugview" type="text/css">#ui-bar-body>#debug-view-toggle:first-child{margin-top:1em}#ui-bar-body>#debug-view-toggle:first-child+*{margin-top:1em}#debug-view-toggle{text-transform:uppercase}#debug-view-toggle:after,#debug-view-toggle:before{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#debug-view-toggle:before{content:"\e838\00a0"}html:not([data-debug-view]) #debug-view-toggle{color:#eee;background-color:transparent;border:1px solid #444;padding:.4em}html:not([data-debug-view]) #debug-view-toggle:hover{background-color:#333;border-color:#eee}html:not([data-debug-view]) #debug-view-toggle:after{content:"\00a0\00a0\e830"}html[data-debug-view] #debug-view-toggle{background-color:#282;border-color:#4a4}html[data-debug-view] #debug-view-toggle:hover{background-color:#4a4;border-color:#6c6}html[data-debug-view] #debug-view-toggle:after{content:"\00a0\00a0\e831"}html[data-debug-view] .debug{padding:.25em;background-color:#234}html[data-debug-view] .debug[title]{cursor:help}html[data-debug-view] .debug.block{display:inline-block;vertical-align:middle}html[data-debug-view] .debug.invalid{text-decoration:line-through}html[data-debug-view] .debug.hidden,html[data-debug-view] .debug.hidden .debug{background-color:#555}html:not([data-debug-view]) .debug.hidden{display:none}html[data-debug-view] .debug[data-name][data-type].nonvoid:after,html[data-debug-view] .debug[data-name][data-type]:before{background-color:rgba(0,0,0,.25);font-family:monospace,monospace;white-space:pre}html[data-debug-view] .debug[data-name][data-type]:before{content:attr(data-name)}html[data-debug-view] .debug[data-name][data-type|=macro]:before{content:"<<" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=macro].nonvoid:after{content:"<</" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=html]:before{content:"<" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type|=html].nonvoid:after{content:"</" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type]:not(:empty):before{margin-right:.25em}html[data-debug-view] .debug[data-name][data-type].nonvoid:not(:empty):after{margin-left:.25em}html[data-debug-view] .debug[data-name][data-type|=special],html[data-debug-view] .debug[data-name][data-type|=special]:before{display:block}</style>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 </head>
 <body>
 	<div id="init-screen">
@@ -272,7 +293,8 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
   
 }
 body {
-  font-size: 1.5em;
+  font-size: 21px;
+  font-family: open sans;
   background-color: white;
 }
 
@@ -280,6 +302,7 @@ body {
   display: none;
 }
 #story {
+  margin-top: 1.8em;
   margin-left: 3em;
   background-color: white;
   color: black;
@@ -358,7 +381,6 @@ Outside, you see Earth slowly getting smaller. It looks like a blue marble hangi
 The submarine zips through the dark, ominous water.  You look out the window and all you see is black.  &lt;span class=&quot;dialogue&quot;&gt;“We have reached a depth of 400 meters below the surface.”&lt;/span&gt;  You look out the window and see amazing creatures: a slithery eel slithering back into its hole, a majestic fish the size of a mini-van gliding through the depths. Just now, you notice how quiet it is.  Twenty minutes ago, it was like the world was coming down around you.  You have some time before you get to your $destination.  What do you do while you wait? 
  
 &lt;&lt;/if&gt;&gt;
-
 [[Talk to Robby.]] 
 [[Take a nap.]] 
 [[Look for a snack.]]  </tw-passagedata><tw-passagedata pid="11" name="Talk to Robby." tags="" position="219,1352" size="100,100">
@@ -395,7 +417,8 @@ You run to the control room to try to figure something out. Robby follows after 
 
 
 [[Okay, how do I get us to safety?]]
-</tw-passagedata><tw-passagedata pid="16" name="Okay, how do I get us to safety?" tags="" position="355,1651" size="100,100">Spelling challenge 1
+</tw-passagedata><tw-passagedata pid="16" name="Okay, how do I get us to safety?" tags="" position="355,1651" size="100,100">
+Spelling challenge 1
 
 
 [[Continue]]
@@ -412,8 +435,6 @@ eally cool photos! These will be great to show everyone when you get home!
 After going through an air lock, you’re in a water-tight room and you open a door, letting the water rush in. You open up the hatch and float out of the boat. $destination is really cool! You can’t wait to tell everyone about this when you get home!
 
 [[Restart]]</tw-passagedata><tw-passagedata pid="20" name="Restart" tags="" position="802,2344" size="100,100">
-
-
 It’s the last day of school! You choose to go on an adventure. Where do you go? It’s up to you! You have a rocket ship and a boat. Which one do you take?
 
 [[I choose the rocket ship!]]
@@ -478,11 +499,14 @@ The thrusters power on and your $vehicle stabilizes.  &lt;span class=&quot;dialo
 Robby gives you a scuba suit so you can explore the destination.  It takes you forever to put on because it’s heavy and bulky. You go to open the airlock when Robby stops you. &lt;span class=&quot;dialogue&quot;&gt;“Wait!”&lt;/span&gt; he says. &lt;span class=&quot;dialogue&quot;&gt;“You need to activate the air control. Without it, you won’t be able to breath out there!”&lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
 
-[[Okay, how do I do that?]]</tw-passagedata><tw-passagedata pid="29" name="Okay, how do I do that?" tags="" position="8.333333333333336,2588.9999999999995" size="100,100">Spelling Challenge 2
+[[Okay, how do I do that?]]</tw-passagedata><tw-passagedata pid="29" name="Okay, how do I do that?" tags="" position="8.333333333333336,2588.9999999999995" size="100,100">
+Spelling Challenge 2
 
-[[Go on!]] </tw-passagedata><tw-passagedata pid="30" name="Got it, Robby!" tags="" position="169.16666666666674,2199.166666666667" size="100,100">Word Challenge 2
+[[Go on!]] </tw-passagedata><tw-passagedata pid="30" name="Got it, Robby!" tags="" position="169.16666666666674,2199.166666666667" size="100,100">
+Word Challenge 2
 
-[[You made it to safety]] </tw-passagedata><tw-passagedata pid="31" name="There it is!" tags="" position="136.66666666666666,1957.6666666666667" size="100,100">Comprehension question
+[[You made it to safety]] </tw-passagedata><tw-passagedata pid="31" name="There it is!" tags="" position="136.66666666666666,1957.6666666666667" size="100,100">
+Comprehension question
 
 [[Keep moving]]</tw-passagedata></tw-storydata></div>
 	<script id="script-sugarcube" type="text/javascript">

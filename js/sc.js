@@ -256,6 +256,8 @@ function submitAnswer(){
     
 
 function goToNext(){
+    const next="Next";
+    pushWord(next);
     nextSeconds.push(new Date().getTime() / 1000 | 0);
     console.log(nextSeconds);
         if(n<3){
