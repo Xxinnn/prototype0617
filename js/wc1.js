@@ -1,23 +1,17 @@
+//localStorage.removeItem("totalPoints");
+//localStorage.removeItem("totalErrors");
 
 var trial=1;
 var i=0; //word in one trial
 var t=0;
 var error=0;
 var points=0;
-var totalPoints;
-var totalErrors;
-//window.onload = function() {
-//    var audio = document.getElementById('audio');
-//    audio.play();
-//}
-//debugger;
+var totalPoints=0;
+var totalErrors=0;
 
-//var dataArray = localStorage.getItem("data");
-//  console.log(dataArray);
-//var time = localStorage.getItem("myData");
-//console.log(time);
-//var startTime = parseInt(localStorage.getItem("start"));
-//pushWord(startTime);
+//localStorage.clear();
+
+
 function playSound(path) {
   // audio supported?
   if (typeof window.Audio === 'function') {
@@ -77,30 +71,30 @@ function submitAnswer(){
     if(input=='Word1'){
         playSound('WC1/Trial_1/Busy bossy.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word2'){
         playSound('WC1/Trial_1/Busy.wav');
         $('.plusPoints').css('display','block');
-        points=points+10;
-        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ points + " points</span>");
-        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ points + " points</span>");
+        totalPoints=totalPoints+10;
+        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ totalPoints + " Points</span>");
+        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ totalPoints + " Points</span>");
 
     }
     else if(input=='Word3'){
         playSound('WC1/Trial_1/Busy body.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word4'){
         playSound('WC1/Trial_1/Busy fussy.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word5'){
         playSound('WC1/Trial_1/Busy buy.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     //trial=trial+1;
     $(".check").attr({
@@ -117,29 +111,29 @@ function submitAnswer(){
     if(input=='Word1'){
         playSound('WC1/Trial_2/Instead instant.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word2'){
         playSound('WC1/Trial_2/Instead inched.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word3'){
         playSound('WC1/Trial_2/Instead listed.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word4'){
         playSound('WC1/Trial_2/Instead insist.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word5'){
         playSound('WC1/Trial_2/Instead.wav');
         $('.plusPoints').css('display','block');
-        points=points+10;
-        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ points + " points</span>");
-        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ points + " points</span>");
+        totalPoints=totalPoints+10;
+        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ totalPoints + " Points</span>");
+        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ totalPoints + " Points</span>");
 
     }
     //trial=trial+1;
@@ -159,30 +153,30 @@ function submitAnswer(){
     if(input=='Word1'){
         playSound('WC1/Trial_3/Language ledges.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word2'){
         playSound('WC1/Trial_3/Language landing.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word3'){
         playSound('WC1/Trial_3/Language.wav');
         $('.plusPoints').css('display','block');
-        points=points+10;
-        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ points + " points</span>");
-        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ points + " points</span>");
+        totalPoints=totalPoints+10;
+        $("#spanPoints").replaceWith("<span id='spanPoints'>"+ totalPoints + " Points</span>");
+        $("#wholePoints").replaceWith("<span id='wholePoints'>"+ totalPoints + " Points</span>");
 
     }
     else if(input=='Word4'){
         playSound('WC1/Trial_3/Language teenage.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     else if(input=='Word5'){
         playSound('WC1/Trial_3/Language lunches.wav');
         $('.minusPoints').css('display','block');
-        error=error+1;
+        totalErrors=totalErrors+1;
     }
     //trial=trial+1;
         $(".check").attr({
@@ -192,13 +186,13 @@ function submitAnswer(){
         });
     }
     
-    if (error==1) {
+    if (totalErrors==1) {
         loseHeart(1);
     }
-    else if (error==2) {
+    else if (totalErrors==2) {
     loseHeart(2);
     }
-    else if(error==3) {
+    else if(totalErrors==3) {
     loseHeart(3);
     }
 }
@@ -210,7 +204,39 @@ function goToNext(){
     const next="Next";
     pushWord(next);
 //        console.log('this is go to next');
-        if(trial<3){
+    if (totalErrors==3){
+        totalPoints=0;
+        var data = Papa.unparse(myData);
+                        //var filename = 'easy.csv';
+                        var saveData = (function () {
+                           var a = document.createElement("a");
+                           document.body.appendChild(a);
+                           a.style = "display: none";
+                           return function (data, fileName) {
+                               var blob = new Blob([data], {type: "octet/stream"}),
+                                   url = window.URL.createObjectURL(blob);
+                               a.href = url;
+                               a.download = fileName;
+                               a.click();
+                               window.URL.revokeObjectURL(url);
+                           };
+                       }());
+        var filename = 'suppplementary.csv';
+                        saveData(data, filename);
+        setTimeout(
+                    function(){
+                        //localStorage.setItem("myData", myData);
+                        location.href = "practice.html";
+                        
+                    },300);
+        
+        $('.activity_panel').hide();
+        localStorage.setItem('totalPoints', totalPoints);
+    }
+    else{
+        
+    
+    if(trial<3){
             
     trial=trial+1;
     $(".plusPoints").css("display","none");
@@ -241,8 +267,8 @@ function goToNext(){
     }           
 }
     else {
-        totalPoints=points;
-        totalErrors=error;
+        //totalPoints=totalPoints;
+//        totalErrors=error;
         console.log("if judge");
         showTwine();
         $('.activity_panel').hide();
@@ -266,6 +292,7 @@ function goToNext(){
 
 //        localStorage.setItem("data", {totalPoints}, {totalErrors});
          console.log("set the localStorage");
+    }
     }
 }
 

@@ -12,7 +12,7 @@ var points=0;
 //var retrievedObject = localStorage.getItem('testObject1');
 var totalPoints = parseInt(localStorage.getItem("totalPoints"));
 var totalErrors = parseInt(localStorage.getItem("totalErrors"));
-//var totalPoints= localStorage.getItem('totalPoints');;
+//var myData= localStorage.getItem('myData');;
 //var totalErrors= localStorage.getItem('totalErrors');;
 //console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
@@ -260,6 +260,30 @@ function goToNext(){
     pushWord(next);
     nextSeconds.push(new Date().getTime() / 1000 | 0);
     console.log(nextSeconds);
+    
+    if (totalErrors==3){
+        
+        var data = Papa.unparse(myData);
+                        //var filename = 'easy.csv';
+                        var saveData = (function () {
+                           var a = document.createElement("a");
+                           document.body.appendChild(a);
+                           a.style = "display: none";
+                           return function (data, fileName) {
+                               var blob = new Blob([data], {type: "octet/stream"}),
+                                   url = window.URL.createObjectURL(blob);
+                               a.href = url;
+                               a.download = fileName;
+                               a.click();
+                               window.URL.revokeObjectURL(url);
+                           };
+                       }());
+        var filename = 'suppplementary.csv';
+                        saveData(data, filename);
+        location.href = "practice.html";
+        $('.activity_panel').hide();
+    }
+    else {
         if(n<3){
             
     $('video').remove();
@@ -312,6 +336,7 @@ function goToNext(){
 //
 //            link.click(); // This will download the data file named "my_data.csv".
         }
+    }
     }
 
 

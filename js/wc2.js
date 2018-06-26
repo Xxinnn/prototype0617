@@ -229,7 +229,34 @@ function submitAnswer(){
 
 
 function goToNext(){
+    const next="Next";
+    pushWord(next);
 //        console.log('this is go to next');
+    
+    if (totalErrors==3){
+        var data = Papa.unparse(myData);
+                        //var filename = 'easy.csv';
+                        var saveData = (function () {
+                           var a = document.createElement("a");
+                           document.body.appendChild(a);
+                           a.style = "display: none";
+                           return function (data, fileName) {
+                               var blob = new Blob([data], {type: "octet/stream"}),
+                                   url = window.URL.createObjectURL(blob);
+                               a.href = url;
+                               a.download = fileName;
+                               a.click();
+                               window.URL.revokeObjectURL(url);
+                           };
+                       }());
+        var filename = 'suppplementary.csv';
+                        saveData(data, filename);
+        location.href = "practice.html";
+        $('.activity_panel').hide();
+    }
+    else {
+        
+    
         if(trial<3){
             
     trial=trial+1;
@@ -269,6 +296,7 @@ function goToNext(){
         localStorage.setItem('totalPoints', totalPoints);
         localStorage.setItem('totalErrors', totalErrors);
                      console.log("set the localStorage");
+    }
     }
 }
 
