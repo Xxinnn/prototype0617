@@ -167,7 +167,12 @@
             
             if(event.data.event_id === 'my_cors_message_wc2'){
                 //$('#twine').hide();
-                location.href = "wc2.html";
+                
+                setTimeout(
+                    function(){
+                        location.href = "wc2.html";
+                    },300);
+                
                 //window.open("sc1.html","_self");
                 //$('.activity_panel').show();
                 console.log(event.data.data);
